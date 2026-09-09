@@ -10,6 +10,4 @@ services:
       - key: NODE_VERSION
         value: "22"
       - key: TIKTOK_UNIQUE_ID
-        sync: false
-      - key: WEB_ORIGIN
-        sync: false
+        value: "mgz7o2"

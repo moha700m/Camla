@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "check": "node --check src/server.js && node --check src/services/TikTokService.js && node --check public/games/camel-rush/game.js && node --check public/games/camel-rush/race-engine.js",
+    "check": "node --check src/server.js && node --check src/services/TikTokService.js && node --check public/games/camel-rush/audio.js && node --check public/games/camel-rush/renderer.js && node --check public/games/camel-rush/game.js",
     "test": "node --test test/*.test.js"
   },
   "repository": {

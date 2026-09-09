@@ -29,6 +29,7 @@ function canvasContext() {
 		save() {},
 		restore() {},
 		translate() {},
+		scale() {},
 		setTransform() {},
 		clearRect() {},
 		fillRect() {},
@@ -55,6 +56,7 @@ test("vertical overlay initializes without browser runtime errors", () => {
 	elements.set("raceCanvas", canvas);
 	const document = { getElementById(id) { if (!elements.has(id)) elements.set(id, element(id)); return elements.get(id); } };
 	const listeners = new Map();
+	const bridgeHandlers = new Map();
 	let frameCalled = false;
 	const window = {
 		CAMEL_RUSH_CONFIG: undefined,
@@ -65,7 +67,7 @@ test("vertical overlay initializes without browser runtime errors", () => {
 		location: { search: "?demo=1" },
 		addEventListener(event, callback) { listeners.set(event, callback); },
 		requestAnimationFrame() {},
-		TikTokBridge: { on() {} },
+		TikTokBridge: { on(event, callback) { bridgeHandlers.set(event, callback); }, reportGameState() {} },
 	};
 	const context = {
 		console,
@@ -73,6 +75,8 @@ test("vertical overlay initializes without browser runtime errors", () => {
 		Math,
 		URLSearchParams,
 		performance: { now: () => 0 },
+		setTimeout: () => 1,
+		clearTimeout() {},
 		document,
 		window,
 		TikTokBridge: window.TikTokBridge,
@@ -85,5 +89,7 @@ test("vertical overlay initializes without browser runtime errors", () => {
 	vm.runInNewContext(engineSource, context);
 	vm.runInNewContext(gameSource, context);
 	assert.equal(frameCalled, true);
-	assert.match(elements.get("laneBoard").innerHTML, /lane-card-0/);
+	bridgeHandlers.get("follow")({ user: { uniqueId: "m7", nickname: "محمد" } });
+	assert.equal(elements.get("raceNumber").textContent, "1");
+	assert.match(elements.get("eventFeed").innerHTML, /محمد/);
 });

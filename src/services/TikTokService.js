@@ -43,7 +43,9 @@ class TikTokService {
 		const connectionOptions = {
 			fetchRoomInfoOnConnect: true,
 			processInitialData: false,
-			enableExtendedGiftInfo: true,
+			// The extended catalog hits EulerStream's premium URL-signing route.
+			// Core GIFT events already contain everything the race rules need.
+			enableExtendedGiftInfo: false,
 		};
 		if (process.env.EULER_API_KEY) connectionOptions.signApiKey = process.env.EULER_API_KEY;
 		const connection = new TikTokLiveConnection(normalized, connectionOptions);

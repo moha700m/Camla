@@ -40,11 +40,13 @@ class TikTokService {
 		this.clearRetry(normalized);
 		this.setStatus(normalized, "connecting", io);
 
-		const connection = new TikTokLiveConnection(normalized, {
+		const connectionOptions = {
 			fetchRoomInfoOnConnect: true,
 			processInitialData: false,
 			enableExtendedGiftInfo: true,
-		});
+		};
+		if (process.env.EULER_API_KEY) connectionOptions.signApiKey = process.env.EULER_API_KEY;
+		const connection = new TikTokLiveConnection(normalized, connectionOptions);
 		const record = { connection, isConnecting: true, connected: false };
 		this.connections.set(normalized, record);
 
@@ -150,6 +152,7 @@ class TikTokService {
 		return {
 			activeUsername: username,
 			provider: "tiktok",
+			signerConfigured: Boolean(process.env.EULER_API_KEY),
 			status: username ? (this.statuses.get(username)?.status || "disconnected") : "disconnected",
 			lastError: username ? (this.lastErrors.get(username) || null) : null,
 			clients: username ? (this.clients.get(username) || 0) : 0,

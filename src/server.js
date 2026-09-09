@@ -20,6 +20,7 @@ const io = new Server(httpServer, allowedOrigins.length
 	: {});
 const port = Number(process.env.PORT || 3000);
 const connectAttempts = new Map();
+let latestGameHeartbeat = null;
 
 function securityHeaders(_req, res, next) {
 	res.set({
@@ -52,7 +53,7 @@ app.use(express.static(publicDir, { extensions: ["html"] }));
 app.get("/play", (_req, res) => res.sendFile(join(publicDir, "games/camel-rush/index.html")));
 
 app.get("/api/health", (_req, res) => {
-	res.json({ ok: true, timestamp: new Date().toISOString(), ...tiktokService.getStats() });
+	res.json({ ok: true, timestamp: new Date().toISOString(), ...tiktokService.getStats(), game: latestGameHeartbeat });
 });
 
 app.get("/api/stats", (_req, res) => res.json(tiktokService.getStats()));
@@ -74,6 +75,18 @@ app.post("/api/disconnect", async (_req, res) => {
 });
 
 io.on("connection", (socket) => {
+	socket.on("game-heartbeat", (payload = {}) => {
+		const phase = String(payload.phase || "").slice(0, 20);
+		if (!["waiting", "countdown", "racing", "final", "finished", "cooldown", "endless"].includes(phase)) return;
+		latestGameHeartbeat = {
+			phase,
+			round: Math.max(1, Number(payload.round) || 1),
+			remainingMs: Math.max(0, Number(payload.remainingMs) || 0),
+			leaderProgress: Math.max(0, Math.min(100, Number(payload.leaderProgress) || 0)),
+			camelCount: Math.max(0, Math.min(60, Number(payload.camelCount) || 0)),
+			updatedAt: Date.now(),
+		};
+	});
 	socket.on("join-room", async (username) => {
 		const normalized = normalizeUsername(username);
 		if (!/^[a-z0-9._]{2,32}$/.test(normalized)) {

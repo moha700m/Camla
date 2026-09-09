@@ -134,7 +134,11 @@
 	}
 	soundToggle.addEventListener("click", toggleSound);
 	window.addEventListener("pointerdown", () => void audio.unlock().then((active) => {
-		if (active) { soundToggle.classList.add("is-on"); soundToggle.innerHTML = "<span>♫</span> الصوت يعمل"; }
+		if (active) {
+			soundToggle.classList.add("is-on");
+			soundToggle.setAttribute("aria-pressed", "true");
+			soundToggle.innerHTML = "<span>♫</span> الصوت يعمل";
+		}
 	}), { once: true });
 
 	if (demoMode) {

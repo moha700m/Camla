@@ -1,0 +1,38 @@
+{
+  "name": "camel-rush-966",
+  "version": "0.1.0",
+  "description": "CAMEL RUSH 966 — a Saudi-born interactive TikTok LIVE racing game",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check": "node --check src/server.js && node --check src/services/TikTokService.js && node --check public/games/camel-rush/game.js && node --check public/games/camel-rush/race-engine.js",
+    "test": "node --test test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moha700m/camel-rush-966.git"
+  },
+  "keywords": [
+    "tiktok",
+    "live",
+    "game",
+    "overlay",
+    "obs",
+    "streaming",
+    "socket.io",
+    "interactive"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "tiktok-live-connector": "^2.4.4"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

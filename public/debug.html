@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CAMEL RUSH — مراقب الأحداث</title>
+    <style>
+      :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #080e1a; color: #f5f1e8; }
+      * { box-sizing: border-box; }
+      body { max-width: 980px; margin: 0 auto; padding: 28px 18px; }
+      h1 { margin: 0 0 6px; font-size: clamp(24px, 5vw, 42px); }
+      p { color: rgba(245,241,232,.68); }
+      .bar { display: flex; gap: 8px; flex-wrap: wrap; margin: 22px 0; }
+      input, button { border: 1px solid rgba(245,241,232,.18); border-radius: 9px; padding: 11px 13px; font: inherit; }
+      input { flex: 1 1 230px; background: #111b2e; color: #fff; }
+      button { background: #52e0d0; color: #07111f; cursor: pointer; font-weight: 700; }
+      #stats { padding: 12px; border: 1px solid rgba(82,224,208,.25); border-radius: 10px; color: #52e0d0; }
+      #log { min-height: 380px; max-height: 62vh; overflow: auto; margin-top: 12px; padding: 14px; border: 1px solid rgba(245,241,232,.12); border-radius: 12px; background: #050b14; font: 13px/1.65 ui-monospace, monospace; }
+      .row { padding: 4px 0; border-bottom: 1px solid rgba(245,241,232,.06); }
+      .gift { color: #ffd166; } .chat { color: #52e0d0; } .error { color: #ff6b5e; } .system { color: rgba(245,241,232,.52); }
+    </style>
+  </head>
+  <body>
+    <h1>CAMEL RUSH <span style="color:#52e0d0">966</span></h1>
+    <p>مراقب الجسر الحقيقي. استخدمه للتأكد من وصول التعليقات والهدايا قبل إضافة مصدر المتصفح.</p>
+    <div class="bar"><input id="username" placeholder="معرّف TikTok بدون @" value="mgz7o2" /><button id="connect">اتصال</button></div>
+    <div id="stats">بانتظار الاتصال…</div>
+    <div id="log" aria-live="polite"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/lib/tiktok-bridge.js"></script>
+    <script>
+      const log = document.getElementById("log");
+      const stats = document.getElementById("stats");
+      const counts = { chat: 0, gift: 0, like: 0, share: 0, follow: 0 };
+      const add = (text, type = "system") => { const row = document.createElement("div"); row.className = `row ${type}`; row.textContent = `[${new Date().toLocaleTimeString("ar-SA")}] ${text}`; log.prepend(row); };
+      const update = () => { stats.textContent = `الحالة: ${TikTokBridge.status} · تعليقات ${counts.chat} · هدايا ${counts.gift} · إعجابات ${counts.like} · مشاركات ${counts.share} · متابعات ${counts.follow}`; };
+      document.getElementById("connect").addEventListener("click", () => {
+        const username = document.getElementById("username").value.trim();
+        if (!username) return;
+        add(`جاري الاتصال بـ @${username}`, "system");
+        TikTokBridge.connect(username);
+      });
+      TikTokBridge.on("status", (data) => { add(`الحالة: ${data.status}`, "system"); update(); });
+      TikTokBridge.on("connected", (data) => add(`تم دخول الغرفة ${data.room || ""}`, "chat"));
+      TikTokBridge.on("chat", (data) => { counts.chat += 1; add(`💬 ${data.user.nickname}: ${data.comment}`, "chat"); update(); });
+      TikTokBridge.on("gift", (data) => { counts.gift += 1; add(`🎁 ${data.user.nickname} أرسل ${data.giftName} ×${data.repeatCount} (${data.giftValue}💎)`, "gift"); update(); });
+      TikTokBridge.on("like", (data) => { counts.like += Number(data.likeCount) || 1; update(); });
+      TikTokBridge.on("share", (data) => { counts.share += 1; add(`↗ ${data.user.nickname} شارك البث`, "chat"); update(); });
+      TikTokBridge.on("follow", (data) => { counts.follow += 1; add(`✦ ${data.user.nickname} تابع`, "chat"); update(); });
+      TikTokBridge.on("error", (data) => add(`خطأ: ${data.message}`, "error"));
+      TikTokBridge.on("reconnecting", () => add("إعادة الاتصال…", "system"));
+      TikTokBridge.on("disconnected", () => add("انقطع الاتصال", "error"));
+      update();
+    </script>
+  </body>
+</html>

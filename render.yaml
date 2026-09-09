@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: camel-rush-966
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: TIKTOK_UNIQUE_ID
+        sync: false
+      - key: WEB_ORIGIN
+        sync: false

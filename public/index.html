@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#080e1a" />
+    <title>CAMEL RUSH 966 — لوحة البث</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="site-header">
+        <a class="brand" href="/" aria-label="CAMEL RUSH 966">
+          <span class="brand-mark">966</span>
+          <span><small>LIVE INTERACTIVE</small><strong>CAMEL RUSH</strong></span>
+        </a>
+        <div class="header-status"><i></i><span id="serverStatus">الجسر المحلي جاهز</span></div>
+      </header>
+
+      <main class="dashboard-grid">
+        <section class="hero-panel">
+          <div class="hero-kicker">SAUDI-BORN • GLOBAL LIVE GAME</div>
+          <h1>خلّ جمهورك<br /><em>يركض معك.</em></h1>
+          <p>سباق هجن سريع يتحكم فيه جمهورك بالهدايا والتعليقات — مصمم ليُفهم خلال ثانيتين ويستمر طوال البث.</p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="/play?demo=1">جرّب الوضع التجريبي <span>↗</span></a>
+            <a class="text-link" href="/debug.html">مراقب الأحداث</a>
+          </div>
+          <div class="hero-stats"><span><b>01</b> سباق سريع</span><span><b>05</b> هجن متنافسة</span><span><b>∞</b> جولات تلقائية</span></div>
+        </section>
+
+        <section class="control-panel" aria-labelledby="setupTitle">
+          <div class="panel-heading"><div><span class="step-tag">01 / SETUP</span><h2 id="setupTitle">جهّز اتصال البث</h2></div><span class="status-dot"></span></div>
+          <p class="panel-copy">شغّل LIVE من نفس الحساب، ثم أدخل اسم المستخدم هنا. الجسر يعمل على جهازك ويقرأ الأحداث مباشرة.</p>
+          <form id="connectForm" class="connect-form">
+            <label for="username">معرّف TikTok</label>
+            <div class="input-wrap"><span>@</span><input id="username" name="username" placeholder="mgz7o2" autocomplete="off" required pattern="[A-Za-z0-9._]{2,32}" /></div>
+            <button class="primary-btn full" type="submit" id="connectBtn">اتصل بالبث <span>→</span></button>
+          </form>
+          <div id="connectionMessage" class="connection-message" role="status"></div>
+          <div class="quick-note"><span>✓</span><div><b>لا تستخدم /demo للبث الحقيقي</b><small>الرابط الحقيقي يظهر بعد الاتصال ويُضاف كمصدر متصفح في TikTok LIVE Studio.</small></div></div>
+        </section>
+
+        <section class="link-panel hidden" id="linkPanel" aria-labelledby="linkTitle">
+          <div class="panel-heading"><div><span class="step-tag">02 / CAPTURE</span><h2 id="linkTitle">رابط مصدر اللعبة</h2></div><span class="ready-badge">READY</span></div>
+          <p class="panel-copy">انسخ الرابط وأضفه كـ Browser Source بمقاس 1080 × 1920.</p>
+          <div class="link-row"><input id="overlayUrl" readonly aria-label="رابط مصدر اللعبة" /><button id="copyBtn" class="copy-btn" type="button">نسخ</button></div>
+          <div class="capture-steps"><span><b>01</b> انسخ الرابط</span><span><b>02</b> أضف Browser Source</span><span><b>03</b> ابدأ البث</span></div>
+          <a class="secondary-btn full" id="openOverlay" target="_blank" rel="noreferrer" href="#">فتح اللعبة ↗</a>
+        </section>
+
+        <section class="rules-panel" aria-labelledby="rulesTitle">
+          <div class="panel-heading"><div><span class="step-tag">03 / GAME LOOP</span><h2 id="rulesTitle">كيف يشارك الجمهور؟</h2></div></div>
+          <div class="rule-list"><div><span class="rule-icon cyan">✦</span><p><b>ادخل</b><small>المشاهد ينضم ويُسند إلى جمل</small></p></div><div><span class="rule-icon gold">🌹</span><p><b>أرسل هدية</b><small>الجمل يتقدم فورًا على الشاشة</small></p></div><div><span class="rule-icon coral">🔥</span><p><b>شارك البث</b><small>طاقة جماعية واندفاعة أخيرة</small></p></div></div>
+        </section>
+      </main>
+      <footer class="site-footer"><span>CAMEL RUSH 966</span><span>Local bridge • No TikTok password required</span></footer>
+    </div>
+    <script src="/js/dashboard.js"></script>
+  </body>
+</html>

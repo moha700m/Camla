@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#080e1a" />
+    <title>CAMEL RUSH 966</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/games/camel-rush/style.css" />
+  </head>
+  <body>
+    <main id="gameShell" class="game-shell">
+      <canvas id="raceCanvas" aria-label="سباق الهجن التفاعلي"></canvas>
+      <div class="world-vignette" aria-hidden="true"></div>
+
+      <header class="top-hud">
+        <div class="brand-lockup">
+          <div class="brand-mark">966</div>
+          <div>
+            <p class="eyebrow">LIVE INTERACTIVE RACE</p>
+            <h1>CAMEL RUSH</h1>
+          </div>
+        </div>
+        <div class="live-stack">
+          <span id="liveStatus" class="live-pill is-offline"><i></i><span>غير متصل</span></span>
+          <span id="viewerCount" class="viewer-count">◉ 0</span>
+        </div>
+      </header>
+
+      <section class="race-meta" aria-label="معلومات الجولة">
+        <div>
+          <span class="meta-label">الجولة</span>
+          <strong id="raceNumber">01</strong>
+        </div>
+        <div class="phase-copy">
+          <span id="phaseLabel" class="meta-label">الاستعداد</span>
+          <strong id="phaseTimer">00:05</strong>
+        </div>
+        <div class="hype-meter">
+          <span class="meta-label">طاقة الجمهور</span>
+          <div class="hype-track"><span id="hypeFill"></span></div>
+        </div>
+      </section>
+
+      <section id="laneBoard" class="lane-board" aria-label="ترتيب الهجن"></section>
+
+      <div id="eventToast" class="event-toast" role="status" aria-live="polite"></div>
+      <div id="eventFeed" class="event-feed" aria-live="polite"></div>
+
+      <section id="podium" class="podium hidden" aria-live="polite">
+        <div class="podium-kicker">نتيجة الجولة</div>
+        <h2><span>CAMEL RUSH</span> — منصة التتويج</h2>
+        <div id="podiumRows" class="podium-rows"></div>
+        <p id="nextRaceCopy">الجولة القادمة تبدأ تلقائيًا</p>
+      </section>
+
+      <footer class="bottom-hud">
+        <div class="interaction-copy">
+          <span class="interaction-icon">✦</span>
+          <span><b>ادخل السباق</b> اكتب «ادخل» أو اختر رقم الجمل</span>
+        </div>
+        <div class="gift-legend">
+          <span>🌹 + سرعة</span>
+          <span>🎁 + دفع</span>
+          <span>👑 صاروخ</span>
+        </div>
+      </footer>
+
+      <aside id="demoControls" class="demo-controls hidden" aria-label="أدوات الاختبار المحلي">
+        <div class="demo-title">وضع الاختبار المحلي</div>
+        <button data-demo="join">دخول محمد</button>
+        <button data-demo="rose">🌹 Rose</button>
+        <button data-demo="gift">🎁 Gift</button>
+        <button data-demo="rocket">👑 Rocket</button>
+        <button data-demo="likes">100 Likes</button>
+        <button data-demo="share">Share</button>
+      </aside>
+    </main>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/lib/tiktok-bridge.js"></script>
+    <script src="/games/camel-rush/config.js"></script>
+    <script src="/games/camel-rush/race-engine.js"></script>
+    <script src="/games/camel-rush/game.js"></script>
+  </body>
+</html>

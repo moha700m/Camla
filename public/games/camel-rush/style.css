@@ -89,6 +89,26 @@ button { font: inherit; }
   top: clamp(180px, 23vh, 280px); right: clamp(16px, 4vw, 42px); left: clamp(16px, 4vw, 42px);
   display: grid; gap: 6px; direction: rtl;
 }
+
+.party-invite {
+	position: absolute;
+	top: 18%;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 3;
+	display: grid;
+	gap: .15rem;
+	min-width: 58%;
+	padding: .65rem 1rem;
+	text-align: center;
+	background: rgba(7, 17, 31, .72);
+	border: 1px solid rgba(85, 224, 210, .38);
+	border-radius: 999px;
+	backdrop-filter: blur(8px);
+}
+
+.party-invite span { color: var(--cyan); font-size: clamp(.62rem, 1.8vw, .82rem); font-weight: 700; }
+.party-invite strong { color: var(--cream); font-size: clamp(.7rem, 2.1vw, .95rem); }
 .lane-card {
   position: relative; display: grid; grid-template-columns: 32px 1fr auto; gap: 8px; align-items: center;
   min-height: 45px; padding: 6px 9px; border: 1px solid rgba(245,241,232,.13); border-right: 3px solid var(--lane);

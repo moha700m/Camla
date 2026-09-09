@@ -17,10 +17,10 @@
 
       <header class="top-hud">
         <div class="brand-lockup">
-          <div class="brand-mark">966</div>
+          <div class="brand-mark"><span>🐪</span></div>
           <div>
-            <p class="eyebrow">EVERY FOLLOW JOINS</p>
-            <h1>CAMEL RUSH</h1>
+            <p class="eyebrow">SAUDI NIGHT LEAGUE · 966</p>
+            <h1>هجن <i>RUSH</i></h1>
           </div>
         </div>
         <div class="live-stack">
@@ -29,43 +29,27 @@
         </div>
       </header>
 
-      <section class="race-meta" aria-label="معلومات الجولة">
-        <div>
-          <span class="meta-label">الجمال</span>
-          <strong id="raceNumber">0</strong>
-        </div>
-        <div class="phase-copy">
-          <span id="phaseLabel" class="meta-label">سباق لا نهائي</span>
-          <strong id="phaseTimer">∞</strong>
-        </div>
-        <div class="hype-meter">
-          <span class="meta-label">طاقة الجمهور</span>
-          <div class="hype-track"><span id="hypeFill"></span></div>
-        </div>
+      <section class="race-meta" aria-label="معلومات السباق">
+        <div class="camel-stat"><span class="meta-label">في المضمار</span><strong><b id="raceNumber">0</b><em>جمل</em></strong></div>
+        <div class="hype-meter"><span class="meta-label">طاقة الجمهور</span><div class="hype-track"><span id="hypeFill"></span></div></div>
       </section>
 
-      <section id="laneBoard" class="party-invite" aria-label="طريقة الدخول"><span>تابع البث</span><strong>جملك يدخل فورًا باسمك</strong></section>
+      <section class="join-banner" aria-label="طريقة الدخول">
+        <div class="join-icon">＋</div>
+        <div><span>FOLLOW = ENTER</span><strong>تابع البث، جملك يدخل باسمك فورًا</strong></div>
+        <div class="join-arrow">←</div>
+      </section>
 
       <div id="eventToast" class="event-toast" role="status" aria-live="polite"></div>
       <div id="eventFeed" class="event-feed" aria-live="polite"></div>
 
-      <section id="podium" class="podium hidden" aria-live="polite">
-        <div class="podium-kicker">نتيجة الجولة</div>
-        <h2><span>CAMEL RUSH</span> — هدية ملكية</h2>
-        <div id="podiumRows" class="podium-rows"></div>
-        <p id="nextRaceCopy">الجولة القادمة تبدأ تلقائيًا</p>
-      </section>
-
       <footer class="bottom-hud">
-        <div class="interaction-copy">
-          <span class="interaction-icon">✦</span>
-          <span><b>FOLLOW = جمل جديد</b> اكتب «ادخل» للدخول أيضًا</span>
-        </div>
         <div class="gift-legend">
-          <span>🌹 تسريع</span>
-          <span>🎁 دفعة قوية</span>
-          <span>👑 جمل VIP</span>
+          <span><b>🌹</b><small>ROSE</small>تسريع</span>
+          <span><b>🎁</b><small>GIFT</small>دفعة قوية</span>
+          <span><b>👑</b><small>PREMIUM</small>جمل ملكي</span>
         </div>
+        <button id="soundToggle" class="sound-toggle" type="button" aria-pressed="false"><span>♪</span> شغّل الصوت</button>
       </footer>
 
       <aside id="demoControls" class="demo-controls hidden" aria-label="أدوات الاختبار المحلي">
@@ -80,6 +64,8 @@
     </main>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/lib/tiktok-bridge.js"></script>
+    <script src="/games/camel-rush/audio.js"></script>
+    <script src="/games/camel-rush/renderer.js"></script>
     <script src="/games/camel-rush/game.js"></script>
   </body>
 </html>

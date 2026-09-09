@@ -61,6 +61,11 @@
 			return () => this.handlers.set(event, listeners.filter((item) => item !== callback));
 		}
 
+		reportGameState(state) {
+			if (!this.socket?.connected) return;
+			this.socket.emit("game-heartbeat", state);
+		}
+
 		dispatch(event, data) {
 			for (const callback of this.handlers.get(event) || []) {
 				try { callback(data); } catch (error) { console.error(`[Bridge] ${event}`, error); }

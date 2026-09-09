@@ -11,5 +11,3 @@ services:
         value: "22"
       - key: TIKTOK_UNIQUE_ID
         value: "mgz7o2"
-      - key: EULER_API_KEY
-        sync: false
